@@ -1,11 +1,15 @@
 {
-  "version": "0.1.0",
+  "version": "0.0.0",
   "license": "MIT",
-  "main": "dist/index.js",
+  "private": false,
   "typings": "dist/index.d.ts",
+  "main": "dist/index.js",
   "files": [
-    "dist",
-    "src"
+    "dist"
+  ],
+  "keywords": [
+    "neo4j",
+    "cypher"
   ],
   "engines": {
     "node": ">=12"
@@ -18,7 +22,8 @@
     "build": "tsc",
     "lint": "eslint {src,test}/** --fix",
     "test": "jest",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "prepublishOnly": "npm run build"
   },
   "prettier": {
     "printWidth": 80,

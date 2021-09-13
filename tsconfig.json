@@ -1,11 +1,13 @@
 {
-  "include": ["src", "test"],
+  "include": ["src"],
   "compilerOptions": {
+    "outDir": "./dist",
     "target": "es6",
     "module": "commonjs",
     "baseUrl": "src",
     "importHelpers": true,
     "declaration": true,
+    "declarationMap": true,
     "sourceMap": true,
     "strict": true,
     "noImplicitReturns": true,
@@ -16,6 +18,5 @@
     "esModuleInterop": true,
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
-    "noEmit": true,
   }
 }
