@@ -16,6 +16,8 @@ import {
   Time,
   Date,
   DateTime,
+  Node,
+  Relationship,
 } from 'neo4j-driver-core';
 import { TypeConverter } from './TypeConverter';
 import { DefaultTypeConverter } from './DefaultTypeConverter';
@@ -32,12 +34,30 @@ export class Neo4jRecordConverter {
   }
 
   toObject(record: Neo4jRecord): Record<string, unknown> {
+    if (record instanceof Node) {
+      return this.convertNodeOrRelationship(record);
+    }
+
+    if (record instanceof Relationship) {
+      return this.convertNodeOrRelationship(record);
+    }
+
+    if (!(record instanceof Neo4jRecord)) {
+      return {};
+    }
+
     const r: Record<string, Record<string, unknown>> = {};
-    for (const [field, values] of record.entries()) {
-      r[field] = {};
-      for (const [key, value] of Object.entries(values)) {
-        r[field][key] = this.convert(value);
-      }
+    for (const [field, nodeOrRelationship] of record.entries()) {
+      r[field] = this.convertNodeOrRelationship(nodeOrRelationship);
+    }
+
+    return r;
+  }
+
+  private convertNodeOrRelationship(nodeOrRelationship: Node | Relationship) {
+    const r: Record<string, any> = {};
+    for (const [key, value] of Object.entries(nodeOrRelationship.properties)) {
+      r[key] = this.convert(value);
     }
 
     return r;

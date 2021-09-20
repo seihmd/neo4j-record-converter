@@ -1,5 +1,5 @@
 {
-  "version": "0.0.0",
+  "version": "0.0.2",
   "license": "MIT",
   "private": false,
   "typings": "dist/index.d.ts",
@@ -7,6 +7,10 @@
   "files": [
     "dist"
   ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/seihmd/neo4j-record-converter.git"
+  },
   "keywords": [
     "neo4j",
     "cypher"
@@ -19,7 +23,8 @@
     "/jest.config.js"
   ],
   "scripts": {
-    "build": "tsc",
+    "build": "tsc -b tsconfig.build.json",
+    "clean": "tsc -b tsconfig.build.json --clean",
     "lint": "eslint {src,test}/** --fix",
     "test": "jest",
     "prepare": "husky install",
@@ -31,7 +36,7 @@
     "singleQuote": true,
     "trailingComma": "es5"
   },
-  "name": "neo4j-record-transformer",
+  "name": "neo4j-record-converter",
   "author": "seihmd",
   "devDependencies": {
     "@types/jest": "^26.0.22",
