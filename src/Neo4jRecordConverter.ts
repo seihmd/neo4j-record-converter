@@ -42,10 +42,6 @@ export class Neo4jRecordConverter {
       return this.convertNodeOrRelationship(record);
     }
 
-    if (!(record instanceof Neo4jRecord)) {
-      return {};
-    }
-
     const r: Record<string, Record<string, unknown>> = {};
     for (const [field, nodeOrRelationship] of record.entries()) {
       r[field] = this.convertNodeOrRelationship(nodeOrRelationship);
