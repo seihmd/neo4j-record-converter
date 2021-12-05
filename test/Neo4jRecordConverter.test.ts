@@ -98,27 +98,4 @@ describe('Neo4jRecordConverter.toObject', () => {
       },
     });
   });
-
-  it('should convert Node', () => {
-    const o = new Neo4jRecordConverter(typeConverter).toObject(record.get('a'));
-    expect(o).toStrictEqual({
-      stringKey: 'StringValue',
-      integerKey: 'IntegerValue',
-      floatKey: 'FloatValue',
-      booleanKey: 'BooleanValue',
-    });
-  });
-
-  it('should convert Relationship', () => {
-    const o = new Neo4jRecordConverter(typeConverter).toObject(record.get('b'));
-    expect(o).toStrictEqual({
-      dateTimeKey: 'DateTimeValue',
-      dateKey: 'DateValue',
-      localDateTimeKey: 'LocalDateTimeValue',
-      localTimeKey: 'LocalTimeValue',
-      timeKey: 'TimeValue',
-      durationKey: 'DurationValue',
-      pointKey: 'PointValue',
-    });
-  });
 });

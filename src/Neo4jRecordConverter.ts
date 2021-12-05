@@ -34,17 +34,18 @@ export class Neo4jRecordConverter {
   }
 
   toObject(record: Neo4jRecord): Record<string, unknown> {
-    if (record instanceof Node) {
-      return this.convertNodeOrRelationship(record);
-    }
-
-    if (record instanceof Relationship) {
-      return this.convertNodeOrRelationship(record);
-    }
-
-    const r: Record<string, Record<string, unknown>> = {};
+    const r: Record<string, Record<string, unknown> | unknown> = {};
     for (const [field, nodeOrRelationship] of record.entries()) {
-      r[field] = this.convertNodeOrRelationship(nodeOrRelationship);
+      if (!nodeOrRelationship) {
+        continue;
+      }
+
+      if (typeof nodeOrRelationship === 'object') {
+        r[field] = this.convertNodeOrRelationship(nodeOrRelationship);
+        continue;
+      }
+
+      r[field] = this.convert(nodeOrRelationship);
     }
 
     return r;
