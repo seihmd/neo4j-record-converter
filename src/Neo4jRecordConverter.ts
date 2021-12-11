@@ -37,6 +37,11 @@ export class Neo4jRecordConverter {
     const r: Record<string, Record<string, unknown> | unknown> = {};
     for (const [field, nodeOrRelationship] of record.entries()) {
       if (!nodeOrRelationship) {
+        r[field] = nodeOrRelationship;
+        continue;
+      }
+      if (Array.isArray(nodeOrRelationship)) {
+        r[field] = nodeOrRelationship;
         continue;
       }
 
